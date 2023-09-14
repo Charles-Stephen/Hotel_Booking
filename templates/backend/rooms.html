@@ -1,0 +1,489 @@
+{% extends 'backend/base.html'%}
+{% block title %}Rooms{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Rooms</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="p-3 container mb-5 w-100 bg-white rounded shadow">
+                        <div class="card shadow">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-warning">Add Room</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <form action="/admin/rooms" class="user card-body" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label>Room Number</label>
+                                        <input type="text" name="room_number" class="form-control form-control-user" placeholder="Room Number" required>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <center>
+                                            <div class="ms-auto me-auto" id="COVERDIV" style="min-height: 10vw; max-width: 20vw; max-height: 20vw; display: none;">
+                                                <img id="coveroutput" class="img-fluid" style="max-height: 20vw;" />
+                                            </div>
+                                        </center>
+                                        <p><input type="file" accept="image/*" name="name_coverimage" id="file" onchange="coverloadFile(event)" style="display: none;" required></p>
+                                        <p><label for="file" onclick="coverpicshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Cover Image</label></p>
+
+                                        <!-- Scripting for Image -->
+                                        <script>
+                                            var coverloadFile = function (event) {
+                                                var name_coverimage = document.getElementById('coveroutput');
+                                                name_coverimage.src = URL.createObjectURL(event.target.files[0]);
+                                            };
+
+                                            function coverpicshow() {
+                                                document.getElementById("COVERDIV").style.display = "block";
+                                            };
+                                        </script>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3 text-center">
+                                            <center>
+                                                <div class="ms-auto me-auto" id="IMG1_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                    <img id="img1_output" class="img-fluid" style="max-height: 20vw;" />
+                                                </div>
+                                            </center>
+                                            <p><input type="file" accept="image/*" name="name_image1" id="file1" onchange="image1loadFile(event)" style="display: none;"></p>
+                                            <p><label for="file1" onclick="image1picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 1</label></p>
+
+                                            <!-- Scripting for Image -->
+                                            <script>
+                                                var image1loadFile = function (event) {
+                                                    var name_image1 = document.getElementById('img1_output');
+                                                    name_image1.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+
+                                                function image1picshow() {
+                                                    document.getElementById("IMG1_DIV").style.display = "block";
+                                                };
+                                            </script>
+                                        </div>
+
+                                        <div class="col-md-3 text-center">
+                                            <center>
+                                                <div class="ms-auto me-auto" id="IMG2_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                    <img id="img2_output" class="img-fluid" style="max-height: 20vw;" />
+                                                </div>
+                                            </center>
+                                            <p><input type="file" accept="image/*" name="name_image2" id="file2" onchange="image2loadFile(event)" style="display: none;"></p>
+                                            <p><label for="file2" onclick="image2picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 2</label></p>
+
+                                            <!-- Scripting for Image -->
+                                            <script>
+                                                var image2loadFile = function (event) {
+                                                    var name_image2 = document.getElementById('img2_output');
+                                                    name_image2.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+
+                                                function image2picshow() {
+                                                    document.getElementById("IMG2_DIV").style.display = "block";
+                                                };
+                                            </script>
+                                        </div>
+
+                                        <div class="col-md-3 text-center">
+                                            <center>
+                                                <div class="ms-auto me-auto" id="IMG3_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                    <img id="img3_output" class="img-fluid" style="max-height: 20vw;" />
+                                                </div>
+                                            </center>
+                                            <p><input type="file" accept="image/*" name="name_image3" id="file3" onchange="image3loadFile(event)" style="display: none;"></p>
+                                            <p><label for="file3" onclick="image3picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 3</label></p>
+
+                                            <!-- Scripting for Image -->
+                                            <script>
+                                                var image3loadFile = function (event) {
+                                                    var name_image3 = document.getElementById('img3_output');
+                                                    name_image3.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+
+                                                function image3picshow() {
+                                                    document.getElementById("IMG3_DIV").style.display = "block";
+                                                };
+                                            </script>
+                                        </div>
+
+                                        <div class="col-md-3 text-center">
+                                            <center>
+                                                <div class="ms-auto me-auto" id="IMG4_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                    <img id="img4_output" class="img-fluid" style="max-height: 20vw;" />
+                                                </div>
+                                            </center>
+                                            <p><input type="file" accept="image/*" name="name_image4" id="file4" onchange="image4loadFile(event)" style="display: none;"></p>
+                                            <p><label for="file4" onclick="image4picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 4</label></p>
+
+                                            <!-- Scripting for Image -->
+                                            <script>
+                                                var image4loadFile = function (event) {
+                                                    var name_image4 = document.getElementById('img4_output');
+                                                    name_image4.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+
+                                                function image4picshow() {
+                                                    document.getElementById("IMG4_DIV").style.display = "block";
+                                                };
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Facilities</label>
+                                        <div class="row p-3 justify-content-around">
+                                            <div class="col-md-3 mb-4">
+                                                <select name="facility1" class="form-control">
+                                                    <option class="text-dark" value="0">Select Facility</option>
+                                                    {% for facility in facilities %}
+                                                    <option value="{{ facility['id'] }}">{{ facility["name"] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 mb-4">
+                                                <select name="facility2" class="form-control">
+                                                    <option class="text-dark" value="0">Select Facility</option>
+                                                    {% for facility in facilities %}
+                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 mb-4">
+                                                <select name="facility3" class="form-control">
+                                                    <option class="text-dark" value="0">Select Facility</option>
+                                                    {% for facility in facilities %}
+                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 mb-4">
+                                                <select name="facility4" class="form-control">
+                                                    <option class="text-dark" value="0">Select Facility</option>
+                                                    {% for facility in facilities %}
+                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 mb-4">
+                                                <select name="facility5" class="form-control">
+                                                    <option class="text-dark" value="0">Select Facility</option>
+                                                    {% for facility in facilities %}
+                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3 mb-4">
+                                                <select name="facility6" class="form-control">
+                                                    <option class="text-dark" value="0">Select Facility</option>
+                                                    {% for facility in facilities %}
+                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Package</label>
+                                        <select name="mypackage" class="form-control">
+                                            <option value="0">Select Package</option>
+                                            {% for pack in package %}
+                                            <option value="{{ pack['id'] }}">{{ pack['name'] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <center>
+                                        <button type="submit" class="btn btn-warning btn-user col-3 btn-block" name="submit">
+                                            Add Room
+                                        </button>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="text-center mt-5">Packages</h2>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Cover Image</th>
+                                            <th>Room Number</th>
+                                            <th>Package</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Cover Image</th>
+                                            <th>Room Number</th>
+                                            <th>Price</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for sh_rm in show_room %}
+                                        <tr>
+                                            <td class="col-sm-5 align-middle text-center"><img style="max-width=8vw;" src="{{url_for('static', filename='frontend/room/')}}{{ sh_rm['cover_img'] }}" class="col-sm-12" /></td>
+                                            <td class="align-middle">{{ sh_rm["room_number"] }}</td>
+                                            <td class="align-middle">{{sh_rm["name"]}}</td>
+                                            <td class="align-middle text-center">
+                                                <form action="/admin/room-details" method="post" class="mb-2">
+                                                    <input type="hidden" name="detail_id" value="{{sh_rm['id']}}" />
+                                                    <input class="bg-warning border border-warning rounded-pill" type="submit" value="Details">
+                                                </form>
+                                                
+                                                <form action="/delete-room" method="post" class="mb-2">
+                                                    <input type="hidden" name="packid" value="{{sh_rm['id']}}" />
+                                                    <input class="bg-danger border border-danger rounded-pill" type="submit" value="Delete">
+                                                </form>
+
+                                                <button class="bg-success border border-success rounded-pill" type="button" data-toggle="modal" data-target="#static_{{sh_rm['id']}}">
+                                                  Update
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Update Modal-->
+                                        <div class="modal fade" id="static_{{sh_rm['id']}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title text-warning" id="staticBackdropLabel">Update Room</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                <form action="/admin/update-rooms" class="user" method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" name="upid" value="{{sh_rm['id']}}">
+                                                    <div class="form-group">
+                                                        <label>Room Number</label>
+                                                        <input type="text" name="uproom_number" class="form-control form-control-user" placeholder="Room Number" value="{{ sh_rm['room_number'] }}" readonly>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <center>
+                                                            <div class="ms-auto me-auto" id="UPCOVERDIV" style="min-height: 10vw; max-width: 20vw; max-height: 20vw; display: none;">
+                                                                <img id="upcoveroutput" class="img-fluid" style="max-height: 20vw;" />
+                                                            </div>
+                                                        </center>
+                                                        <p><input type="file" accept="image/*" name="upname_coverimage" id="upfile" onchange="upcoverloadFile(event)" style="display: none;"></p>
+                                                        <p><label for="upfile" onclick="upcoverpicshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Cover Image</label></p>
+
+                                                        <!-- Scripting for Image -->
+                                                        <script>
+                                                            var upcoverloadFile = function (event) {
+                                                                var upname_coverimage = document.getElementById('upcoveroutput');
+                                                                upname_coverimage.src = URL.createObjectURL(event.target.files[0]);
+                                                            };
+
+                                                            function upcoverpicshow() {
+                                                                document.getElementById("UPCOVERDIV").style.display = "block";
+                                                            };
+                                                        </script>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-3 text-center">
+                                                            <center>
+                                                                <div class="ms-auto me-auto" id="UPIMG1_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                                    <img id="upimg1_output" class="img-fluid" style="max-height: 20vw;" />
+                                                                </div>
+                                                            </center>
+                                                            <p><input type="file" accept="image/*" name="upname_image1" id="upfile1" onchange="upimage1loadFile(event)" style="display: none;"></p>
+                                                            <p><label for="upfile1" onclick="upimage1picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 1</label></p>
+
+                                                            <!-- Scripting for Image -->
+                                                            <script>
+                                                                var upimage1loadFile = function (event) {
+                                                                    var upname_image1 = document.getElementById('upimg1_output');
+                                                                    upname_image1.src = URL.createObjectURL(event.target.files[0]);
+                                                                };
+
+                                                                function upimage1picshow() {
+                                                                    document.getElementById("UPIMG1_DIV").style.display = "block";
+                                                                };
+                                                            </script>
+                                                        </div>
+
+                                                        <div class="col-md-3 text-center">
+                                                            <center>
+                                                                <div class="ms-auto me-auto" id="UPIMG2_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                                    <img id="upimg2_output" class="img-fluid" style="max-height: 20vw;" />
+                                                                </div>
+                                                            </center>
+                                                            <p><input type="file" accept="image/*" name="upname_image2" id="upfile2" onchange="upimage2loadFile(event)" style="display: none;"></p>
+                                                            <p><label for="upfile2" onclick="upimage2picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 2</label></p>
+
+                                                            <!-- Scripting for Image -->
+                                                            <script>
+                                                                var upimage2loadFile = function (event) {
+                                                                    var upname_image2 = document.getElementById('upimg2_output');
+                                                                    upname_image2.src = URL.createObjectURL(event.target.files[0]);
+                                                                };
+
+                                                                function upimage2picshow() {
+                                                                    document.getElementById("UPIMG2_DIV").style.display = "block";
+                                                                };
+                                                            </script>
+                                                        </div>
+
+                                                        <div class="col-md-3 text-center">
+                                                            <center>
+                                                                <div class="ms-auto me-auto" id="UPIMG3_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                                    <img id="upimg3_output" class="img-fluid" style="max-height: 20vw;" />
+                                                                </div>
+                                                            </center>
+                                                            <p><input type="file" accept="image/*" name="upname_image3" id="upfile3" onchange="upimage3loadFile(event)" style="display: none;"></p>
+                                                            <p><label for="upfile3" onclick="upimage3picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 3</label></p>
+
+                                                            <!-- Scripting for Image -->
+                                                            <script>
+                                                                var upimage3loadFile = function (event) {
+                                                                    var upname_image3 = document.getElementById('upimg3_output');
+                                                                    upname_image3.src = URL.createObjectURL(event.target.files[0]);
+                                                                };
+
+                                                                function upimage3picshow() {
+                                                                    document.getElementById("UPIMG3_DIV").style.display = "block";
+                                                                };
+                                                            </script>
+                                                        </div>
+
+                                                        <div class="col-md-3 text-center">
+                                                            <center>
+                                                                <div class="ms-auto me-auto" id="UPIMG4_DIV" style="min-height: 5vw; max-width: 8vw; max-height: 8vw; display: none;">
+                                                                    <img id="upimg4_output" class="img-fluid" style="max-height: 20vw;" />
+                                                                </div>
+                                                            </center>
+                                                            <p><input type="file" accept="image/*" name="upname_image4" id="upfile4" onchange="upimage4loadFile(event)" style="display: none;"></p>
+                                                            <p><label for="upfile4" onclick="upimage4picshow()" class="rounded-pill btn btn-outline-warning" style="cursor: pointer;">Image 4</label></p>
+
+                                                            <!-- Scripting for Image -->
+                                                            <script>
+                                                                var upimage4loadFile = function (event) {
+                                                                    var upname_image4 = document.getElementById('upimg4_output');
+                                                                    upname_image4.src = URL.createObjectURL(event.target.files[0]);
+                                                                };
+
+                                                                function upimage4picshow() {
+                                                                    document.getElementById("UPIMG4_DIV").style.display = "block";
+                                                                };
+                                                            </script>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Facilities</label>
+                                                        <div class="row p-3 justify-content-around">
+                                                            <div class="col-md-3 mb-4">
+                                                                <select name="upfacility1" class="form-control">
+                                                                    <option class="text-dark" value="-">{{sh_rm["faci1"]}}</option>
+                                                                    {% for facility in facilities %}
+                                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-4">
+                                                                <select name="upfacility2" class="form-control">
+                                                                    <option class="text-dark" value="-">{{sh_rm["faci2"]}}</option>
+                                                                    {% for facility in facilities %}
+                                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-4">
+                                                                <select name="upfacility3" class="form-control">
+                                                                    <option class="text-dark" value="-">{{sh_rm["faci3"]}}</option>
+                                                                    {% for facility in facilities %}
+                                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-4">
+                                                                <select name="upfacility4" class="form-control">
+                                                                    <option class="text-dark" value="-">{{sh_rm["faci4"]}}</option>
+                                                                    {% for facility in facilities %}
+                                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-4">
+                                                                <select name="upfacility5" class="form-control">
+                                                                    <option class="text-dark" value="-">{{sh_rm["faci5"]}}</option>
+                                                                    {% for facility in facilities %}
+                                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-4">
+                                                                <select name="upfacility6" class="form-control">
+                                                                    <option class="text-dark" value="-">{{sh_rm["faci6"]}}</option>
+                                                                    {% for facility in facilities %}
+                                                                    <option value="{{ facility['id'] }}">{{ facility['name'] }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Package</label>
+                                                        <select name="upmypackage" class="form-control">
+                                                            <option value="-">{{sh_rm["name"]}}</option>
+                                                            {% for pack in package %}
+                                                            <option value="{{ pack['id'] }}">{{ pack['name'] }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <center>
+                                                        <button type="submit" class="btn btn-warning btn-user col-3 btn-block" name="submit">
+                                                            Update Room
+                                                        </button>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-warning">Understood</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}

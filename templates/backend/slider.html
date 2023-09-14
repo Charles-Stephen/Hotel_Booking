@@ -1,0 +1,63 @@
+{% extends 'backend/base.html'%}
+{% block title %}Slider{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Sliders</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="p-3 container w-100 bg-white rounded shadow">
+                        <form action="/admin/slider" method="post" enctype="multipart/form-data">
+                            <label class="form-label text-warning">Add New Slide</label>
+                            <input class="form-control" type="file" name="img" id="img">
+
+                            <button class="bth btn-warning rounded-pill mt-2" type="submit">Upload</button>
+                        </form>
+                    </div>
+
+
+                    <h2 class="text-center mt-5">Slides</h2>
+                    <div class="container row mt-2">
+
+                        {% for slide in slidedata %}
+                        <div class="col-lg-4">
+                            <!-- Dropdown Card Example -->
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                {% if slide["status"] == 'show' %}
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <form action="/manage" method="post">
+                                        <input type="hidden" name="slideid" value="{{slide['id']}}">
+                                        <button type="submit" class="border border-light text-danger fas fa-times-circle" name="submit"></button>
+                                    </form>
+                                </div>
+                                {% elif slide["status"] == 'hide' %}
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <form action="/select" method="post">
+                                        <input type="hidden" name="slideid" value="{{slide['id']}}">
+                                        <button type="submit" class="border border-light text-success fas fa-check-circle" name="submit"></button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                                <!-- Card Body -->
+                                <img class="card-body" src="{{url_for('static', filename='frontend/slider/')}}{{slide['img']}}" />
+
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}

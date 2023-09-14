@@ -1,0 +1,33 @@
+{% extends 'frontend/base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+        <!-- ACCOUNT -->
+        <section class="section-account parallax bg-11">
+            <div class="awe-overlay"></div>
+            <div class="container">
+                <div class="login-register">
+                    <div class="text text-center">
+                        <h2>LOGIN ACCOUNT</h2>
+                        <form style="margin-bottom: 20px;" method="POST" action="/logincode" enctype="multipart/form-data" class="account_form">
+                            <input type="hidden" name="userrole" value="1">
+                            <div class="field-form">
+                                <input type="email" class="field-text" placeholder="Enter Email Address..." name="email">
+                            </div>
+                            <div class="field-form">
+                                <input type="password" class="field-text" placeholder="Password" name="pass">
+                                <span class="view-pass"><i class="lotus-icon-view"></i></span>
+                            </div>
+                            <div class="field-form field-submit">
+                                <button type="submit" class="awe-btn awe-btn-13">Login</button>
+                            </div>
+                            <span class="account-desc"><a href="/register">I don’t have an account</a>  -  <a href="/forgot">Forgot Password</a></span>
+                        </form>
+
+                        <a href="/"><button class="awe-btn awe-btn-default"><i class="fa fa-reply-all" aria-hidden="true"></i> Back to Home</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END / ACCOUNT -->
+
+{% endblock %}

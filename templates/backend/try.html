@@ -1,0 +1,117 @@
+
+if 'upname_image1' in request.files and request.files['upname_image1'].filename != '':
+        upname_coverimage = request.files['upname_coverimage']
+        if 'upname_coverimage' in request.files:
+            upname_image1 = request.files['upname_image1']
+            upname_image2 = request.files['upname_image2']
+            upname_image3 = request.files['upname_image3']
+            upname_image4 = request.files['upname_image4']
+
+            if upname_coverimage.filename != '':
+                # Cover Image
+                converted_num = str(random.randrange(9999999999999999999999999999999999))
+                covername = converted_num + 'coverimage.jpg'  # Change this to the desired new name
+
+                # Image 1
+                if upname_image1.filename != '':
+                    converted_num1 = str(random.randrange(9999999999999999999999999999999999))
+                    imgname1 = converted_num1 + 'image1.jpg'  # Change this to the desired new name
+                else:
+                    imgname1 = ''
+
+                # Image 2
+                if upname_image2.filename != '':
+                    converted_num2 = str(random.randrange(9999999999999999999999999999999999))
+                    imgname2 = converted_num2 + 'image2.jpg'  # Change this to the desired new name
+                else:
+                    imgname2 = ''
+
+                # Image 3
+                if upname_image3.filename != '':
+                    converted_num3 = str(random.randrange(9999999999999999999999999999999999))
+                    imgname3 = converted_num3 + 'image3.jpg'  # Change this to the desired new name
+                else:
+                    imgname3 = ''
+
+                # Image 4
+                if upname_image4.filename != '':
+                    converted_num4 = str(random.randrange(9999999999999999999999999999999999))
+                    imgname4 = converted_num4 + 'image4.jpg'  # Change this to the desired new name
+                else:
+                    imgname4 = ''
+
+                # Query and Values
+                query = "SELECT * FROM rooms WHERE cover_img = %s OR uproom_number = %s"
+                values = (covername, uproomnumber,)
+
+                # Adding in Query And Values
+                # Image 1
+                if imgname1 != '':
+                    query += " OR img_1 = %s"
+                    values += (imgname1,)
+                # Image 2
+                if imgname2 != '':
+                    query += " OR img_2 = %s"
+                    values += (imgname2,)
+                # Image 3
+                if imgname3 != '':
+                    query += " OR img_3 = %s"
+                    values += (imgname3,)
+                # Image 4
+                if imgname4 != '':
+                    query += " OR img_4 = %s"
+                    values += (imgname4,)
+
+                final_q = query + " WHERE id = $s" + room_join
+                conn.execute(query, values)
+                ch_img = fetch_rows_as_dicts(conn)
+                if ch_img:
+                    return """
+                            <script>
+                                alert('An error occurred, please try again!');
+                                window.location.assign("/admin/rooms");
+                            </script>
+                            """
+                else:
+                    facility1 = request.form['facility1']
+                    facility2 = request.form['facility2']
+                    facility3 = request.form['facility3']
+                    facility4 = request.form['facility4']
+                    facility5 = request.form['facility5']
+                    facility6 = request.form['facility6']
+                    mypackage = request.form['mypackage']
+
+                    conn.execute("INSERT INTO rooms (cover_img, img_1, img_2, img_3, img_4, uproom_number, facilities_1, facilities_2, facilities_3, facilities_4, facilities_5, facilities_6, package_id) VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (covername, imgname1, imgname2, imgname3, imgname4, uproomnumber, facility1, facility2, facility3, facility4, facility5, facility6, mypackage))
+                    mysql.connection.commit()
+                    conn.close()
+
+                    # Cover Image
+                    upname_coverimage.save('static/frontend/room/' + covername)
+                    # Image 1
+                    if imgname1 != '':
+                        upname_image1.save('static/frontend/room/' + imgname1)
+                    # Image 2
+                    if imgname2 != '':
+                        upname_image2.save('static/frontend/room/' + imgname2)
+                    # Image 3
+                    if imgname3 != '':
+                        upname_image3.save('static/frontend/room/' + imgname3)
+                    # Image 4
+                    if imgname4 != '':
+                        upname_image4.save('static/frontend/room/' + imgname4)
+                    return """<Script>
+                                    window.location.assign("/admin/rooms");
+                                    </Script>"""
+            else:
+                return """
+                            <script>
+                                alert('An error occurred, please try again!');
+                                window.location.assign("/admin/slider");
+                            </script>
+                            """
+        return """
+                <script>
+                    alert('An error occurred, please try again!');
+                    window.location.assign("/admin/rooms");
+                </script>
+                """

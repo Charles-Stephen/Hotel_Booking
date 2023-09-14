@@ -1,0 +1,197 @@
+{% extends 'frontend/base.html' %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+
+ <!-- SUB BANNER -->
+    <section class="section-sub-banner bg-9">
+        <div class="sub-banner">
+            <div class="container">
+                <div class="text text-center">
+                    <h2>My Profile</h2>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- END / SUB BANNER -->
+    <section class="section-our-best bg-white">
+        <div class="container">
+            <center>
+              <table style="width:50%" class="table table-striped" border="2">
+                <tr>
+                  <th>Name</th>
+                  <td>{{ admindata["name"] }}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td>{{ admindata["email"] }}</td>
+                </tr>
+                <tr>
+                  <th>Phone</th>
+                  <td>{{ admindata["phone"] }}</td>
+                </tr>
+              </table>
+                <button type="button" data-toggle="modal" data-target="#myprof" class="awe-btn awe-btn-13">Update Profile</button>
+            </center>
+        </div>
+    </section>
+
+    <!-- Update modal -->
+    <div class="modal fade" id="myprof" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <form action="/edit-user" method="post" class="user  modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Update Profile</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="user_id" value="{{admindata['id']}}">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user"
+                        placeholder="Full Name" name="name" value="{{admindata['name']}}">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-user"
+                        placeholder="Email Address" name="email" value="{{admindata['email']}}" readonly>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control form-control-user"
+                        placeholder="Your New Password" name="pass">
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control form-control-user"
+                        placeholder="Phone Number" name="phone" value="{{admindata['phone']}}">
+                </div>
+            </div>
+            <div class="modal-footer row">
+                <center>
+                    <!--Submit Button-->
+                    <button type="submit" class="btn btn-warning" name="submit">
+                        Update
+                    </button>
+                    <!--Cancel Button-->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </center>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <section class="section-our-best bg-white">
+        <div class="container">
+            <div class="tabs tabs-2">
+                <ul>
+                    <li><a href="#tabs-4">BOOKED ROOMS</a></li>
+                    <li><a href="#tabs-5">CANCELED ROOMS</a></li>
+                    <li><a href="#tabs-6">DISAPPROVED ROOMS</a></li>
+                </ul>
+                <div id="tabs-4">
+                    <center>
+                      <table style="width:50%" class="table table-striped" border="2">
+                          <thead>
+                              <tr>
+                                  <th>Cover Image</th>
+                                  <th>Room</th>
+                                  <th>Booking Date</th>
+                                  <th>Total Amount</th>
+                              </tr>
+                          </thead>
+                          <tfoot>
+                              <tr>
+                                  <th>Cover Image</th>
+                                  <th>Room</th>
+                                  <th>Booking Date</th>
+                                  <th>Total Amount</th>
+                              </tr>
+                          </tfoot>
+                          <tbody>
+                            {% for b in booked: %}
+                              <tr>
+                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{b['cover_img']}}"></td>
+                                  <td style="text-align: center">ROOM#{{b["room_number"]}}</td>
+                                  <td style="text-align: center">{{b["booking_date"]}}</td>
+                                  <td style="text-align: center">{{b["total_cost"]}}</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                    </center>
+                </div>
+
+                <div id="tabs-5">
+                    <center>
+                      <table style="width:50%" class="table table-striped" border="2">
+                          <thead>
+                              <tr>
+                                  <th>Cover Image</th>
+                                  <th>Room</th>
+                                  <th>Booking Date</th>
+                                  <th>Total Amount</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tfoot>
+                              <tr>
+                                  <th>Cover Image</th>
+                                  <th>Room</th>
+                                  <th>Booking Date</th>
+                                  <th>Total Amount</th>
+                                  <th>Action</th>
+                              </tr>
+                          </tfoot>
+                          <tbody>
+                            {% for c in can_b: %}
+                              <tr>
+                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{c['cover_img']}}"></td>
+                                  <td style="text-align: center">ROOM#{{c["room_number"]}}</td>
+                                  <td style="text-align: center">{{c["booking_date"]}}</td>
+                                  <td style="text-align: center">{{c["total_cost"]}}</td>
+                                  <td style="text-align: center">
+                                      <form action="/profile" method="post">
+                                          <input type="hidden" name="delid" value="{{c['id']}}">
+                                          <button type="submit" class="awe-btn awe-btn-5">Cancel Booking</button>
+                                      </form>
+                                  </td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                    </center>
+                </div>
+                <div id="tabs-6">
+                    <center>
+                      <table style="width:50%" class="table table-striped" border="2">
+                          <thead>
+                              <tr>
+                                  <th>Cover Image</th>
+                                  <th>Room</th>
+                                  <th>Booking Date</th>
+                                  <th>Total Amount</th>
+                              </tr>
+                          </thead>
+                          <tfoot>
+                              <tr>
+                                  <th>Cover Image</th>
+                                  <th>Room</th>
+                                  <th>Booking Date</th>
+                                  <th>Total Amount</th>
+                              </tr>
+                          </tfoot>
+                          <tbody>
+                            {% for d in dis_b: %}
+                              <tr>
+                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{d['cover_img']}}"></td>
+                                  <td style="text-align: center">ROOM#{{d["room_number"]}}</td>
+                                  <td style="text-align: center">{{d["booking_date"]}}</td>
+                                  <td style="text-align: center">{{d["total_cost"]}}</td>
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,159 @@
+    conn = mysql.connection.cursor()
+    if request.method == "POST":
+        # Id and Room Number
+        upid = request.form["upid"]
+        uproomnumber = request.form["uproom_number"]
+
+        # query
+        up_query = "UPDATE `rooms` SET room_number = %s"
+        up_value = (uproomnumber,)
+
+        # Facility #1
+        upfacility1 = request.form['upfacility1']
+        if upfacility1 != '-':
+            up_query += ", facilities_1 = %s"
+            up_value += ( upfacility1,)
+
+        # Facility #2
+        upfacility2 = request.form['upfacility2']
+        if upfacility2 != '-':
+            up_query += ", facilities_2 = %s"
+            up_value += ( upfacility2,)
+
+        # Facility #3
+        upfacility3 = request.form['upfacility3']
+        if upfacility3 != '-':
+            up_query += ", facilities_3 = %s"
+            up_value += ( upfacility3,)
+
+        # Facility #4
+        upfacility4 = request.form['upfacility4']
+        if upfacility4 != '-':
+            up_query += ", facilities_4 = %s"
+            up_value += ( upfacility4,)
+
+        # Facility #5
+        upfacility5 = request.form['upfacility5']
+        if upfacility5 != '-':
+            up_query += ", facilities_5 = %s"
+            up_value += ( upfacility5,)
+
+        # Facility #6
+        upfacility6 = request.form['upfacility6']
+        if upfacility6 != '-':
+            up_query += ", facilities_6 = %s"
+            up_value += ( upfacility6,)
+
+        # Package
+        upmypackage = request.form['upmypackage']
+        if upmypackage != '-':
+            up_query += ", package_id = %s"
+            up_value += ( upmypackage,)
+
+        # Cover Image
+        if 'upname_coverimage' in request.files and request.files['upname_coverimage'].filename != '':
+            upconverted_num = str(random.randrange(9999999999999999999999999999999999))
+            upcovername = upconverted_num + 'coverimage.jpg'  # Change this to the desired new name
+            conn.execute("SELECT * FROM rooms WHERE cover_img = %s", (upcovername,))
+            upch_img = fetch_rows_as_dicts(conn)
+            if len(upch_img) == 0:
+                # Cover Image
+                upname_coverimage.save('static/frontend/room/' + upcovername)
+                up_query += ", cover_img = %s"
+                up_value += ( upcovername,)
+            else:
+                return """
+                    <script>
+                        alert('An error occurred, please try again!');
+                        window.location.assign("/admin/rooms");
+                    </script>
+                    """
+
+        # Image #1
+        if 'upname_image1' in request.files and request.files['upname_image1'].filename != '':
+            upconverted_num1 = str(random.randrange(9999999999999999999999999999999999))
+            upimgname1 = upconverted_num1 + 'image1.jpg'  # Change this to the desired new name
+            conn.execute("SELECT * FROM rooms WHERE img_1 = %s", (upimgname1,))
+            upch_img1 = fetch_rows_as_dicts(conn)
+            if len(upch_img1) == 0:
+                # Image #1
+                upname_image1.save('static/frontend/room/' + upimgname1)
+                up_query += ", img_1 = %s"
+                up_value += ( upimgname1,)
+            else:
+                return """
+                    <script>
+                        alert('An error occurred, please try again!');
+                        window.location.assign("/admin/rooms");
+                    </script>
+                    """
+
+        # Image #2
+        if 'upname_image2' in request.files and request.files['upname_image2'].filename != '':
+            upconverted_num2 = str(random.randrange(9999999999999999999999999999999999))
+            upimgname2 = upconverted_num2 + 'image2.jpg'  # Change this to the desired new name
+            conn.execute("SELECT * FROM rooms WHERE img_2 = %s", (upimgname2,))
+            upch_img2 = fetch_rows_as_dicts(conn)
+            if len(upch_img2) == 0:
+                # Image #2
+                upname_image2.save('static/frontend/room/' + upimgname2)
+                up_query += ", img_2 = %s"
+                up_value += ( upimgname2,)
+            else:
+                return """
+                    <script>
+                        alert('An error occurred, please try again!');
+                        window.location.assign("/admin/rooms");
+                    </script>
+                    """
+
+        # Image #3
+        if 'upname_image3' in request.files and request.files['upname_image3'].filename != '':
+            upconverted_num3 = str(random.randrange(9999999999999999999999999999999999))
+            upimgname3 = upconverted_num3 + 'image3.jpg'  # Change this to the desired new name
+            conn.execute("SELECT * FROM rooms WHERE img_3 = %s", (upimgname3,))
+            upch_img3 = fetch_rows_as_dicts(conn)
+            if len(upch_img3) == 0:
+                # Image #3
+                upname_image3.save('static/frontend/room/' + upimgname3)
+                up_query += ", img_3 = %s"
+                up_value += ( upimgname3,)
+            else:
+                return """
+                    <script>
+                        alert('An error occurred, please try again!');
+                        window.location.assign("/admin/rooms");
+                    </script>
+                    """
+
+        # Image #4
+        if 'upname_image4' in request.files and request.files['upname_image4'].filename != '':
+            upconverted_num4 = str(random.randrange(9999999999999999999999999999999999))
+            upimgname4 = upconverted_num4 + 'image4.jpg'  # Change this to the desired new name
+            conn.execute("SELECT * FROM rooms WHERE img_4 = %s", (upimgname4,))
+            upch_img4 = fetch_rows_as_dicts(conn)
+            if len(upch_img4) == 0:
+                # Image #4
+                upname_image4.save('static/frontend/room/' + upimgname4)
+                up_query += ", img_4 = %s"
+                up_value += ( upimgname4,)
+            else:
+                return """
+                    <script>
+                        alert('An error occurred, please try again!');
+                        window.location.assign("/admin/rooms");
+                    </script>
+                    """
+
+        # Updating query
+        up_value += ( upid,)
+        final_q = up_query + " WHERE id = %s"
+        conn.execute(final_q, up_value)
+        mysql.connection.commit()
+        conn.close()
+        return """
+            <script>
+                alert('Room Successfully Updated!');
+                window.location.assign("/admin/rooms");
+            </script>
+            """

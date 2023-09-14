@@ -1,0 +1,174 @@
+{% extends 'backend/base.html'%}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row justify-content-center">
+
+                        <div class="col-xl-6 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xl font-weight-bold text-warning text-uppercase mb-1">
+                                                Profile</div>
+                                            <table border="1" class="h5 mb-0 font-weight-bold text-gray-800 w-100">
+                                                <tr>
+                                                    <th class="p-2 text-center"><strong>Name: </strong></th>
+                                                    <td class="p-2 text-center">{{admindata["name"]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="p-2 text-center"><strong>Email: </strong></th>
+                                                    <td class="p-2 text-center">{{admindata["email"]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="p-2 text-center"><strong>Phone: </strong></th>
+                                                    <td class="p-2 text-center">{{admindata["phone"]}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="p-3 container mb-5 w-100 bg-white rounded shadow">
+                        <div class="card shadow">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-warning">Add User</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <form class="user card-body" method="post" action="/add-user">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="Full Name" name="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email Address" name="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Password" name="pass">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="tel" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Phone Number" name="phone">
+                                    </div>
+                                    <center>
+                                        <button type="submit" class="btn btn-warning btn-user col-3 btn-block" name="submit">
+                                            Add User
+                                        </button>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Message</th>
+                                            <th>Status</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td class="align-middle">{{user["name"]}}</td>
+                                            <td class="align-middle">{{user["email"]}}</td>
+                                            <td class="align-middle">{{user["phone"]}}</td>
+                                            <td class="align-middle {% if user['role'] == 0: %} text-primary {% else: %} text-info {% endif %}"><strong>{% if user["role"] == 0: %}Admin{% else: %}User{% endif %}</strong></td>
+                                            {% if user["role"] == 1: %}
+                                                <td class="d-flex align-middle justify-content-around">
+                                                    <form action="/delete-user" method="post">
+                                                        <input type="hidden" name="userid" value="{{user['id']}}" />
+                                                        <input class="bg-danger border border-danger rounded-pill" type="submit" value="Delete">
+                                                    </form>
+
+                                                    <button type="button" class="bg-success border border-success rounded-pill collapsed" data-toggle="collapse" data-target="#collapse{{user['id']}}" aria-expanded="true" aria-controls="collapse{{user['id']}}">
+                                                      Update
+                                                    </button>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            <div id="collapse{{user['id']}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                                                <div class="bg-white py-2 collapse-inner rounded">
+                                                    <form action="/edit-user" method="post" class="user">
+                                                        <input type="hidden" name="user_id" value="{{user['id']}}">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control form-control-user"
+                                                                placeholder="Full Name" name="name" value="{{user['name']}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control form-control-user"
+                                                                placeholder="Email Address" name="email" value="{{user['email']}}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control form-control-user"
+                                                                placeholder="Your New Password" name="pass">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="tel" class="form-control form-control-user"
+                                                                placeholder="Phone Number" name="phone" value="{{user['phone']}}">
+                                                        </div>
+
+                                                        <center>
+                                                            <!--Submit Button-->
+                                                            <button type="submit" class="col-4 btn btn-warning btn-user btn-block" name="submit">
+                                                                Update
+                                                            </button>
+                                                            <!--Cancel Button-->
+                                                            <button type="button" class="col-4  btn btn-dark btn-user btn-block collapsed" data-toggle="collapse" data-target="#collapse{{user['id']}}" aria-expanded="true" aria-controls="collapse{{user['id']}}">
+                                                              Cancel
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}

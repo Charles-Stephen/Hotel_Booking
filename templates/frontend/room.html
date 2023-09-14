@@ -1,0 +1,62 @@
+{% extends 'frontend/base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+        <!-- SUB BANNER -->
+        <section class="section-sub-banner bg-9">
+            <div class="awe-overlay"></div>
+            <div class="sub-banner">
+                <div class="container">
+                    <div class="text text-center">
+                        <h2>ROOMS</h2>
+                        <p>Lorem Ipsum is simply dummy text</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END / SUB BANNER -->
+
+        <!-- ROOM -->
+        <section class="section-room bg-white">
+            <div class="container">
+
+                <div class="room-wrap-5">
+                    <div class="row">
+
+                        {% for r in show_room: %}
+                            <!-- ITEM -->
+                            <div class="col-xs-6">
+                                <div class="room_item-5" data-background="{{url_for('static', filename='frontend/room/')}}{{ r['cover_img'] }}">
+
+                                    <div class="img">
+                                        <a href="#"><img src="{{url_for('static', filename='frontend/images/room/grid2/img-1.jpg')}}" alt=""></a>
+                                    </div>
+
+                                    <div class="room_item-forward">
+                                        <h2><a href="#">ROOM#{{ r["room_number"] }}</a></h2>
+                                        <span class="price">PKR{{ r["price"] }}/- per day</span>
+                                    </div>
+
+                                    <div class="room_item-back">
+                                        <h3>ROOM#{{ r["room_number"] }}</h3>
+                                        <span class="price">PKR{{ r["price"] }}/- per day</span>
+                                        <p>Lorem Ipsum is simply dummy text of the <b>printing</b> and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
+                                        <form action="/room-details" method="post">
+                                            <input type="hidden" name="detail_id" value="{{ r['id'] }}">
+                                            <button type="submit" class="awe-btn awe-btn-13">VIEW DETAIL</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- END / ITEM -->
+                        {% endfor %}
+
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <!-- END / ROOM -->
+
+{% endblock %}

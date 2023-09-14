@@ -1,0 +1,98 @@
+hotel_booking_system
+
+users
+	id
+	name
+	email
+	password
+	phone
+	created_on
+	updated_on
+	role
+
+package
+	id
+	name
+	price
+
+facilities
+	id
+	name
+
+rooms
+	id
+	cover_img
+	img_1
+	img_2
+	img_3
+	img_4
+	room_number
+	facilities_1
+	facilities_2
+	facilities_3
+	facilities_4
+	facilities_5
+	facilities_6
+	package_id
+
+contact
+	id
+	name
+	email
+	message
+
+slider
+	id
+	img
+	status
+
+order
+	id
+	user_id
+	room_id
+	booking_date
+	starting_date
+	ending_date
+	room_cost
+	total_cost
+	credit_card_number
+	status
+
+amount
+	id
+	total_capital
+	returned_capital
+
+
+
+
+
+        # for rm in sel_room:
+        #     i = str(rm["id"])
+            # Adding in Query And Values
+            # facility 1
+            # if rm["facilities_1"] != 0:
+                room_query += ", f1.name AS faci1"
+                room_join += " INNER JOIN facilities f1 ON r.facilities_1 = f1.id"
+            # facility 2
+            # if rm["facilities_2"] != 0:
+            #     room_query += ", f2.name AS faci2"
+            #     room_join += " INNER JOIN facilities f2 ON r.facilities_2 = f2.id"
+            # facility 3
+            # if rm["facilities_3"] != 0:
+            #     room_query += ", f3.name AS faci3"
+            #     room_join += " INNER JOIN facilities f3 ON r.facilities_3 = f3.id"
+            # facility 4
+            # if rm["facilities_4"] != 0:
+            #     room_query += ", f4.name AS faci4"
+            #     room_join += " INNER JOIN facilities f4 ON r.facilities_4 = f4.id"
+            # facility 5
+            # if rm["facilities_5"] != 0:
+            #     room_query += ", f5.name AS faci5"
+            #     room_join += " INNER JOIN facilities f5 ON r.facilities_5 = f5.id"
+            # facility 6
+            # if rm["facilities_6"] != 0:
+        #         room_query += ", f6.name AS faci6"
+        #         room_join += " INNER JOIN facilities f6 ON r.facilities_6 = f6.id"
+        # final_q = room_query + ", p.name FROM rooms r INNER JOIN `package` p ON r.package_id = p.id" + room_join
+        # conn.execute(final_q)

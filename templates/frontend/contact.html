@@ -1,0 +1,83 @@
+{% extends 'frontend/base.html' %}
+{% block title %} Contact {% endblock %}
+{% block content %}
+
+    <!-- SUB BANNER -->
+    <section class="section-sub-banner bg-9">
+        <div class="sub-banner">
+            <div class="container">
+                <div class="text text-center">
+                    <h2>CONTACT WITH US</h2>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- END / SUB BANNER -->
+
+    <!-- CONTACT -->
+    <section class="section-contact">
+        <div class="container">
+            <div class="contact">
+                <div class="row">
+
+                    <div class="col-md-6 col-lg-5">
+
+                        <div class="text">
+                            <h2>Contact</h2>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                            <ul>
+                                <li><i class="icon lotus-icon-location"></i> c 81 Main Korangi Rd, Phase 2 Commercial Area Defence Housing Authority, Karachi, Karachi City, Sindh 75500</li>
+                                <li><a href="tel:+923343427289"><i class="icon lotus-icon-phone"></i> +92 3343427289</a></li>
+                                <li><a href="mailto:admin@gmail.com"><i class="icon fa fa-envelope-o"></i> admin@gmail.com</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-lg-offset-1">
+                        <div class="contact-form">
+                            <form action="/contact-us" method="post">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {% if admindata != "none": %}
+                                            <input type="text" class="field-text"  name="name" placeholder="Name" value="{{ admindata['name'] }}">
+                                        {% else: %}
+                                            <input type="text" class="field-text"  name="name" placeholder="Name">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {% if admindata != "none": %}
+                                            <input type="text" class="field-text" name="email" placeholder="Email" value="{{ admindata['email'] }}">
+                                        {% else: %}
+                                            <input type="text" class="field-text" name="email" placeholder="Email">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <textarea cols="30" rows="10" name="message"  class="field-textarea" placeholder="Write what do you want"></textarea>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="awe-btn awe-btn-13">SEND</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END / CONTACT -->
+
+    <!-- MAP -->
+    <section class="section-map">
+        <h1 class="element-invisible">Map</h1>
+        <div class="contact-map">
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.925675390301!2d67.07087467455355!3d24.832215246388728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33c6b03254785%3A0x1b2a58aef179afe2!2sAptech%20Defence%20Center!5e0!3m2!1sen!2s!4v1693631351930!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+    <!-- END / MAP -->
+
+{% endblock %}

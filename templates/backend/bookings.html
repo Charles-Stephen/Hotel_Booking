@@ -1,0 +1,135 @@
+{% extends 'backend/base.html'%}
+{% block title %}Bookings{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Bookings</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="p-3 container mb-5 w-100 bg-white rounded shadow">
+                        <div class="card shadow">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-warning">Book Room</h6>
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <form class="user card-body" method="post" action="/admin/bookings">
+                                    <!-- Checking if Disapprove Form Start -->
+                                    <input type="hidden" name="dis" value="false">
+                                    <!-- Checking if Disapprove Form End -->
+                                    <!-- User Id -->
+                                    <input type="hidden" name="usid" value="{{ admindata['id'] }}" />
+
+                                    <div class="form-group">
+                                        <select name="room_number" id="room_id" class="form-control" required>
+                                            <option value="-">Select Room</option>
+                                            {% for r in room %}
+                                                <option value="{{ r['id'] }}">{{ r["room_number"] }} and {{ r["id"] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Package</label>
+                                            <input type="text" class="form-control form-control-user" id="packagename" name="packagename" readonly />
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Cost(per day)</label>
+                                            <input type="text" class="form-control form-control-user" id="room_price" name="room_price" readonly />
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label for="starting_date">Starting Date:</label>
+                                            <input type="date" class="form-control form-control-user" id="starting_date" name="starting_date" required />
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label for="ending_date">Ending Date:</label>
+                                            <input type="date" class="form-control form-control-user" id="ending_date" name="ending_date" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Credit Card</label>
+                                        <input type="text" class="form-control form-control-user" placeholder="Credit Card Number" name="cd_num" />
+                                    </div>
+                                    <center>
+                                        <button type="submit" class="btn btn-warning btn-user col-3 btn-block" name="submit">
+                                            Book
+                                        </button>
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Room Number</th>
+                                            <th>Package</th>
+                                            <th>Total Cost</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Room Number</th>
+                                            <th>Package</th>
+                                            <th>Total Cost</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for b in book %}
+                                        <tr>
+                                            <td class="align-middle">{{b["name"]}}<br><small>{{b["email"]}}</small></td>
+                                            <td class="align-middle">Room#{{b["room_number"]}}</td>
+                                            <td class="align-middle">{{b["pname"]}}</td>
+                                            <td class="align-middle">{{b["total_cost"]}}</td>
+                                            <td class="align-middle text-center">
+                                                <form action="/booking-details" class="mt-1 mb-1" method="post">
+                                                    <input type="hidden" name="bookid" value="{{b['id']}}" />
+                                                    <input class="bg-warning border border-warning rounded-pill" type="submit" value="Details">
+                                                </form>
+
+                                                <form action="/admin/bookings" class="mt-2 mb-1" method="post">
+                                                    <!-- Checking if Disapprove Form Start -->
+                                                    <input type="hidden" name="dis" value="true">
+                                                    <input type="hidden" name="bookprice" value="{{b['total_cost']}}">
+                                                    <!-- Checking if Disapprove Form End -->
+                                                    <input type="hidden" name="bookid" value="{{b['id']}}" />
+                                                    <input class="bg-success border border-success rounded-pill" type="submit" value="Disapprove">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}

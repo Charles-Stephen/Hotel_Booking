@@ -1,0 +1,211 @@
+{% extends 'frontend/base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+        <!-- BANNER SLIDER -->
+        <section class="section-slider">
+            <h1 class="element-invisible">Slider</h1>
+            <div id="slider-revolution">
+                <ul>
+                    {% for s in slidedata: %}
+                    <li data-transition="fade">
+                        <img src="{{url_for('static', filename='frontend/slider/')}}{{s['img']}}" data-bgposition="left center" data-duration="14000" data-bgpositionend="right center" alt="">
+                        
+                        <div class="tp-caption sft fadeout slider-caption-sub slider-caption-1" data-x="center" data-y="100" data-speed="700" data-start="1500" data-easing="easeOutBack">
+                         <img src="{{url_for('static', filename='frontend/images/logo-footer.png')}}" alt="icons">
+                        </div>
+
+<!--                        <div class="tp-caption sft fadeout slider-caption-sub slider-caption-1" data-x="center" data-y="240" data-speed="700" data-start="1500" data-easing="easeOutBack">-->
+<!--                         WELCOME TO-->
+<!--                        </div>-->
+
+<!--                        <div class="tp-caption sfb fadeout slider-caption slider-caption-sub-1" data-x="center" data-y="280" data-speed="700" data-easing="easeOutBack"  data-start="2000">THE LOTUS HOTEL</div>-->
+<!--                        -->
+<!--                        <a href="#" class="tp-caption sfb fadeout awe-btn awe-btn-12 awe-btn-slider" data-x="center" data-y="380" data-easing="easeOutBack" data-speed="700" data-start="2200">VIEW NOW</a>-->
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </section>
+        <!-- END / BANNER SLIDER -->
+
+        <!-- ACCOMMODATIONS -->
+        <section class="section-accommo_1 bg-white">
+            <div class="container">
+
+                <div class="accomd-modations_1">
+
+                    <h2 class="heading">ACCOMMODATIONS</h2>
+
+                    <div class="accomd-modations-content_1" >
+
+                        <div class="accomd-modations-slide_1" >
+                            {% for rm in show_room: %}
+                            <!-- ITEM -->
+                            <div class="accomd-modations-room_1">
+                                <div class="img">
+                                    <a><img src="{{url_for('static', filename='frontend/room/')}}{{ rm['cover_img'] }}" alt=""></a>
+                                </div>
+                                <div class="text">
+                                    <h2><a>Room# {{ rm['room_number'] }}</a></h2>
+                                    <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
+                                    <div class="wrap-price">
+                                        <p class="price">
+                                            <span class="amout">PKR{{ rm['price'] }}</span> /days
+                                        </p>
+                                        <form action="/room-details" method="post">
+                                            <input type="hidden" name="detail_id" value="{{ rm['id'] }}">
+                                            <button type="submit" class="awe-btn awe-btn-default">VIEW DETAIL</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END / ITEM -->
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- ACCOMMODATIONS -->
+        
+        <!-- SECTION GUESTBOOK - EVENT DEAD -->
+        <section class="section-guestbook-event bg-white">
+            <div class="container">
+
+                <div class="guestbook-event">
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <h2 class="heading">GUEST BOOK</h2>
+
+                            <div class="guestbook-content_1 owl-single">
+
+                                <!-- ITEM -->
+                                <div class="guestbook-item_1">
+                                    <div class="img">
+                                        <img src="{{url_for('static', filename='frontend/images/avatar/img-5.jpg')}}" alt="">
+                                        <span><strong>Seelentag</strong>From Los Angeles, California</span>
+                                    </div>
+                                
+                                    <div class="text">
+                                        <p>Both the outstanding staff and the beautiful room made our first visit to Catalina Island such a success! We enjoyed the appetizers during "wine time", the turndown service, the fresh flowers in our room and the breakfast delivered to our room in a wicker basket.. An attendant set it out for us in a charming fashion. We would not consider another property when we return to Catalina!</p>
+                                    </div> 
+                                </div>
+                                <!-- END / ITEM -->
+
+                                <!-- ITEM -->
+                                <div class="guestbook-item_1">
+                                    <div class="img">
+                                        <img src="{{url_for('static', filename='frontend/images/avatar/img-5.jpg')}}" alt="">
+                                        <span><strong>Seelentag</strong>From Los Angeles, California</span>
+                                    </div>
+                                
+                                    <div class="text">
+                                        <p>Both the outstanding staff and the beautiful room made our first visit to Catalina Island such a success! We enjoyed the appetizers during "wine time", the turndown service, the fresh flowers in our room and the breakfast delivered to our room in a wicker basket.. An attendant set it out for us in a charming fashion. We would not consider another property when we return to Catalina!</p>
+                                    </div> 
+                                </div>
+                                <!-- END / ITEM -->
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <h2 class="heading">GUEST BOOK</h2>
+
+                            <div class="event-slide owl-single">
+                                <!-- ITEM -->
+                                <div class="event-item">
+                                    <div class="img hover-zoom">
+                                        <a href="#">
+                                            <img src="{{url_for('static', filename='frontend/images/home/eventdeal/img-1.jpg')}}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END / ITEM -->
+
+                                <!-- ITEM -->
+                                <div class="event-item">
+                                    <div class="img hover-zoom">
+                                        <a href="#">
+                                            <img src="{{url_for('static', filename='frontend/images/home/eventdeal/img-1.jpg')}}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- END / ITEM -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- END / SECTION GUESTBOOK - EVENT DEAD -->
+        
+        <!-- ABOUT -->
+        <section class="section-home-about bg-white">
+            <div class="container">
+                <div class="home-about">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img">
+                                <a href="#"><img src="{{url_for('static', filename='frontend/images/home/about/img-1.jpg')}}" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text">
+                                <h2 class="heading">ABOUT US</h2>
+                                <span>Lorem Ipsum is simply dummy text</span>
+                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source</p>
+                                <a href="/about" class="awe-btn awe-btn-default">READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END / ABOUT -->
+
+        <!-- OUR BEST -->
+        <section class="section-our-best bg-white">
+            <div class="container">
+
+                <div class="our-best">
+                    <div class="row">
+
+                        <div class="col-md-6 col-md-push-6">
+                            <div class="img">
+                                <img src="{{url_for('static', filename='frontend/images/home/ourbest/img-1.jpg')}}" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-md-pull-6 ">
+                            <div class="text">
+                                <h2 class="heading">Tourist Spots</h2>
+                                <p>One of Catalina Island's best-loved hotels, Hotel Vista Del Mar is recognized as one of Avalon's leading hotels with gracious island hospitality, thoughtful amenities and distinctive .</p>
+                                <ul>
+                                    <li><img src="{{url_for('static', filename='frontend/images/home/ourbest/icon-3.png')}}" alt="icon">5 Star Restruants</li>
+                                    <li><img src="{{url_for('static', filename='frontend/images/home/ourbest/icon-2.png')}}" alt="icon">Bars</li>
+                                    <li><img src="{{url_for('static', filename='frontend/images/home/ourbest/icon-4.png')}}" alt="icon">Karaoke Studio</li>
+                                    <li><img src="{{url_for('static', filename='frontend/images/home/ourbest/icon-5.png')}}" alt="icon">Spa</li>
+                                    <li><img src="{{url_for('static', filename='frontend/images/home/ourbest/icon-1.png')}}" alt="icon">Cafe</li>
+                                    <li><img src="{{url_for('static', filename='frontend/images/home/ourbest/icon-6.png')}}" alt="icon">Ocean</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- END / OUR BEST -->
+
+{% endblock %}

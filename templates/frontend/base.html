@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<!-- Mirrored from landing.engotheme.com/html/lotus/demo/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Aug 2023 10:39:57 GMT -->
+<head>
+    <meta charset="utf-8">
+    <!-- TITLE -->
+    <title>{% block title %}{% endblock %} | Hotel Miramar SG</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="{{url_for('static', filename='frontend/images/logo-footer.png')}}"/>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,300,500,600%7cMontserrat:400,700" rel='stylesheet' type='text/css'>
+
+    <!-- CSS LIBRARY -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/font-lotusicon.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/owl.carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/jquery-ui.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/magnific-popup.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/settings.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/lib/bootstrap-select.min.css')}}">
+
+    <!-- MAIN STYLE -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='frontend/css/style.css')}}">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+</head>
+
+<!--[if IE 7]> <body class="ie7 lt-ie8 lt-ie9 lt-ie10"> <![endif]-->
+<!--[if IE 8]> <body class="ie8 lt-ie9 lt-ie10"> <![endif]-->
+<!--[if IE 9]> <body class="ie9 lt-ie10"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+
+    {% if pg != "contact": %}
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <span class="preloader-dot"></span>
+    </div>
+    <!-- END / PRELOADER -->
+    {% endif %}
+
+    <!-- PAGE WRAP -->
+    <div id="page-wrap">
+
+        {% if pg != "login" %}
+        <!-- HEADER -->
+        <header id="header"  class="{% if pg == 'home': %}header-v2{% endif %}">
+
+            <!-- HEADER TOP -->
+            <div class="header_top">
+                <div class="container">
+
+                    <div class="header_left float-left">
+                        <span><i class="lotus-icon-location"></i> c 81 Main Korangi Rd, Phase 2 Commercial Area DHA, Karachi, Sindh 75500</span>
+                        <span><i class="lotus-icon-phone"></i> +92 3343427289</span>
+                    </div>
+
+                    {% if pg != "login" %}
+                    {% if admindata == "none": %}
+                        <div class="header_right float-right">
+                            <span class="login-register">
+                                <a class="awe-btn awe-btn-13" href="/login">Login</a>
+                                <a class="awe-btn awe-btn-13" href="/register">register</a>
+                            </span>
+                        </div>
+                    {% else: %}
+                        <div class="header_right float-right">
+                            <span class="login-register">
+                                <a class="awe-btn awe-btn-13" href="/logout">Logout</a>
+                            </span>
+                        </div>
+                    {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+            <!-- END / HEADER TOP -->
+
+            <!-- HEADER LOGO & MENU -->
+            <div class="header_content" id="header_content">
+
+                <div class="container text text-center">
+                    <!-- HEADER LOGO -->
+                    <div class="header_logo">
+                        <a href="/"><img src="{{url_for('static', filename='frontend/images/logo-header.png')}}" alt=""></a>
+                    </div>
+                    <!-- END / HEADER LOGO -->
+
+                    <!-- HEADER MENU -->
+                    <nav class="header_menu">
+                        <ul class="menu">
+                            <li class="{% if pg == 'home': %}current-menu-item{% endif %}"><a href="/">Home</a></li>
+
+                            <li class="{% if pg == 'about': %}current-menu-item{% endif %}"><a href="/about">About</a></li>
+
+                            <li class="{% if pg == 'room': %}current-menu-item{% endif %}"><a href="/rooms">Rooms</a></li>
+
+                            <li class="{% if pg == 'contact': %}current-menu-item{% endif %}"><a href="/contact-us">Contact</a></li>
+
+                            <li class="{% if pg == 'profile': %}current-menu-item{% endif %}"><a href="/profile">Profile</a></li>
+                        </ul>
+                    </nav>
+                    <!-- END / HEADER MENU -->
+
+                   <!-- MENU BAR -->
+                    <span class="menu-bars">
+                        <span></span>
+                    </span>
+                    <!-- END / MENU BAR -->
+
+                </div>
+            </div>
+            <!-- END / HEADER LOGO & MENU -->
+
+        </header>
+        <!-- END / HEADER -->
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+
+        {% if pg != "login" %}
+        <!-- Login modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <form method="POST" action="/logincode" enctype="multipart/form-data" class="account_form modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Please Login First!</h4>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="userrole" value="1">
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-user"
+                        id="exampleInputEmail" aria-describedby="emailHelp"
+                        placeholder="Enter Email Address..." name="email">
+                </div>
+                <div class="form-group" >
+                    <input type="password" class="form-control form-control-user"
+                        id="exampleInputPassword" placeholder="Password" name="pass">
+                    <span class="view-pass"><i class="lotus-icon-view"></i> Show password</span>
+                </div>
+                <center>
+                  <span class="account-desc"><a href="/register">I don’t have an account</a>  -  <a href="/forgot">Forgot Password</a></span>
+                </center>
+              </div>
+              <div class="modal-footer row">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                <button type="submit" class="awe-btn awe-btn-13">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- FOOTER -->
+        <footer id="footer">
+
+            <!-- FOOTER CENTER -->
+            <div class="footer_center">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-lg-5">
+                            <div class="widget widget_logo">
+                                <div class="widget-logo">
+                                    <div class="img">
+                                        <a href="#"><img src="{{url_for('static', filename='frontend/images/logo-footer.png')}}" alt=""></a>
+                                    </div>
+                                    <div class="text">
+                                        <p><i class="lotus-icon-location"></i> 225 Beach Street, Australian</p>
+                                        <p><i class="lotus-icon-phone"></i> 1-548-854-8898</p>
+                                        <p><i class="fa fa-envelope-o"></i> <a href="https://landing.engotheme.com/cdn-cgi/l/email-protection#c2aaa7aeaead82b6aaa7aeadb6b7b1aaadb6a7aeeca1adaf"><span class="__cf_email__" data-cfemail="c4aca1a8a8ab84b0aca1a8abb0b1b7acabb0a1a8eaa7aba9">[email&#160;protected]</span></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-lg-2">
+                            <div class="widget">
+                                <h4 class="widget-title">Page site</h4>
+                                <ul>
+                                    <li><a href="#">Guest Book</a></li>
+                                    <li><a href="#">Gallery</a></li>
+                                    <li><a href="#">Restaurant</a></li>
+                                    <li><a href="#">Event</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-lg-2">
+                            <div class="widget">
+                                <h4 class="widget-title">ABOUT</h4>
+                                <ul>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Comming Soon</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-lg-3">
+                            <div class="widget widget_tripadvisor">
+                                <h4 class="widget-title">Tripadvisor</h4>
+                                <div class="tripadvisor">
+                                    <p>Now with hotel reviews by</p>
+                                    <img src="{{url_for('static', filename='frontend/images/tripadvisor.png')}}" alt="">
+                                    <span class="tripadvisor-circle">
+                                        <i></i>
+                                        <i></i>
+                                        <i></i>
+                                        <i></i>
+                                        <i class="part"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- END / FOOTER CENTER -->
+
+            <!-- FOOTER BOTTOM -->
+            <div class="footer_bottom">
+                <div class="container">
+                    <p>&copy; 2023 Hotel Miramar SG All rights reserved.</p>
+                </div>
+            </div>
+            <!-- END / FOOTER BOTTOM -->
+
+        </footer>
+        <!-- END / FOOTER -->
+        {% endif %}
+
+    </div>
+    <!-- END / PAGE WRAP -->
+
+
+    <!-- LOAD JQUERY -->
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery-1.11.0.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/bootstrap-select.js')}}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;signed_in=true"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/isotope.pkgd.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.themepunch.revolution.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.themepunch.tools.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/owl.carousel.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.appear.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.countTo.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.countdown.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.parallax-1.1.3.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.magnific-popup.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/SmoothScroll.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/scripts.js')}}"></script>
+    {% if pg == "contact": %}
+    <!-- LOAD JQUERY -->
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAb2lfsiytHD7rMhBaAvJz2CKhk05uiIuE"></script>
+
+    <!-- validate -->
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.form.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='frontend/js/lib/jquery.validate.min.js')}}"></script>
+    {% endif %}
+</body>
+
+<!-- Mirrored from landing.engotheme.com/html/lotus/demo/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 09 Aug 2023 10:40:01 GMT -->
+</html>

@@ -1,0 +1,62 @@
+{% extends 'backend/base.html'%}
+{% block title %}Contacts{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">All Contacts</h1>
+                    </div>
+
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Message</th>
+                                            <th>Read</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Message</th>
+                                            <th>Read</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for contact in contacts %}
+                                        <tr class="{% if contact['status'] == 'unread': %}conread{% endif %}">
+                                            <td class="align-middle">{{contact["name"]}}</td>
+                                            <td class="align-middle">{{contact["email"]}}</td>
+                                            <td class="align-middle">{{contact["message"]}}</td>
+                                            {% if contact["status"] == 'unread': %}
+                                                <form action="/admin/contacts" method="post">
+                                                    <td class="align-middle">
+                                                        <input type="hidden" name="read" value="{{contact['id']}}">
+                                                        <input type="submit" name="submit" value="read">
+                                                    </td>
+                                                </form>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}

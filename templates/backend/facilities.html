@@ -1,0 +1,54 @@
+{% extends 'backend/base.html'%}
+{% block title %}Facilities{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Facility</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="p-3 container w-100 bg-white rounded shadow">
+                        <form action="/admin/facilities" method="post" enctype="multipart/form-data">
+                            <label class="form-label text-warning">Add New Slide</label>
+                            <input class="form-control" placeholder="Facility Name" type="text" name="facility_name" required />
+
+                            <button class="bth btn-warning rounded-pill mt-2" type="submit">Submit</button>
+                        </form>
+                    </div>
+
+
+                    <h2 class="text-center mt-5">Facilities</h2>
+                    <div class="table-responsive p-3" style="max-height:400px;">
+                        <div class="container row mt-2 justify-content-around">
+
+                            {% for facility in facilities %}
+                            <div class="col-xl-3 col-md-3 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xl font-weight-bold text-warning text-uppercase mb-1">
+                                                    {{facility["name"]}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}

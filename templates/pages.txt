@@ -1,0 +1,18 @@
+		ADMIN PANEL
+Register				Done
+Login					Done
+Logout					Done
+Forget Password + Re-New Password	Done
+contacts				Done
+slider					Done
+index					Done
+rooms					Not Done
+facilities				Not Done
+package					Not Done
+booking					Not Done
+Manage Registered Customer		Not Done
+Manage Room Booking Details		Not Done
+Approve/disapprove Booked Room		Not Done
+Manage Feedback given by user		Not Done
+Manage Front end Slider			Not Done
+Update Profile				

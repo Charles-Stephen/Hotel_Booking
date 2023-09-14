@@ -1,0 +1,113 @@
+{% extends 'backend/base.html'%}
+{% block title %}Room Details{% endblock %}
+{% block content %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Room Detail</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                                        <div class="row justify-content-center">
+
+                        <div class="col-xl-8 col-md-8 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <table border="1" class="h5 mb-0 font-weight-bold text-gray-800 w-100">
+                                                {% for sh_rm in show_room %}
+                                                    <div class="text-center d-flex flex-column">
+                                                        <img style="max-width=25vw;" src="{{url_for('static', filename='frontend/room/')}}{{ sh_rm['cover_img'] }}">
+                                                        <h3><strong class="text-dark">Cover Image</strong></h3>
+                                                    </div>
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Room Number: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['room_number'] }}</td>
+                                                    </tr>
+                                                    {% if sh_rm['faci1']: %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Facility #1: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['faci1'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if sh_rm['faci2']: %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Facility #2: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['faci2'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if sh_rm['faci3']: %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Facility #3: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['faci3'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if sh_rm['faci4']: %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Facility #4: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['faci4'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if sh_rm['faci5']: %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Facility #5: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['faci5'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if sh_rm['faci6']: %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Facility #6: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['faci6'] }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Package: </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['name'] }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="p-2 text-center"><strong>Price(per day): </strong></th>
+                                                        <td class="p-2 text-center">{{ sh_rm['price'] }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+                <div class="container p-3">
+                    <div class="p-2 row justify-content-around">
+                        {% for sh_rm in show_room %}
+                            {% if sh_rm['img_1'] != '' %}
+                            <img src="{{url_for('static', filename='frontend/room/')}}{{ sh_rm['img_1'] }}" class="shadow p-2 bg-warning col-md-3" />
+                            {% endif %}
+
+                            {% if sh_rm['img_2'] != '' %}
+                            <img src="{{url_for('static', filename='frontend/room/')}}{{ sh_rm['img_2'] }}" class="shadow p-2 bg-warning col-md-3" />
+                            {% endif %}
+
+                            {% if sh_rm['img_3'] != '' %}
+                            <img src="{{url_for('static', filename='frontend/room/')}}{{ sh_rm['img_3'] }}" class="shadow p-2 bg-warning col-md-3" />
+                            {% endif %}
+
+                            {% if sh_rm['img_4'] != '' %}
+                            <img src="{{url_for('static', filename='frontend/room/')}}{{ sh_rm['img_4'] }}" class="shadow p-2 bg-warning col-md-3" />
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <!-- End of Main Content -->
+
+
+{% endblock %}
