@@ -1252,12 +1252,22 @@ def admin_rooms():
                 conn.execute(query, values)
                 ch_img = fetch_rows_as_dicts(conn)
                 if ch_img:
-                    return """
-                            <script>
-                                alert('An error occurred, please try again!');
-                                window.location.assign("/admin/rooms");
-                            </script>
-                            """
+                    conn.execute("SELECT * FROM rooms WHERE room_number = %s", (roomnumber,))
+                    q2 = fetch_rows_as_dicts(conn)
+                    if q2:
+                        return """
+                                <script>
+                                    alert('Room already exists!');
+                                    window.location.assign("/admin/rooms");
+                                </script>
+                                """
+                    else:
+                        return """
+                                <script>
+                                    alert('An error occurred, please try again!');
+                                    window.location.assign("/admin/rooms");
+                                </script>
+                                """
                 else:
                     facility1 = request.form['facility1']
                     facility2 = request.form['facility2']
