@@ -1608,7 +1608,7 @@ def admin_orders():
     conn.execute("SELECT * FROM rooms")
     room = fetch_rows_as_dicts(conn)
 
-    conn.execute("SELECT b.id, u.name, u.email, r.room_number, b.total_cost, b.status, p.name AS pname, b.booking_date, b.starting_date, b.ending_date, b.credit_card_number, b.room_cost FROM room_booking b INNER JOIN users u ON b.user_id = u.id INNER JOIN rooms r ON b.room_id = r.id INNER JOIN package p ON r.package_id = p.id ORDER BY b.id DESC")
+    conn.execute("SELECT b.id, u.name, u.email, r.room_number, b.total_cost, b.status, p.name AS pname, b.booking_date, b.starting_date, b.ending_date, b.credit_card_number, b.room_cost FROM room_booking b INNER JOIN users u ON b.user_id = u.id INNER JOIN rooms r ON b.room_id = r.id INNER JOIN package p ON r.package_id = p.id WHERE status = 'booked' ORDER BY b.id DESC")
     book = fetch_rows_as_dicts(conn)
 
     if request.method == "POST":
@@ -1712,7 +1712,7 @@ def admin_orders():
             conn.close()
             return """
                     <script>
-                        alert('You've disapproved the customers booking!');
+                        alert('You've disapproved a customers room!');
                         window.location.assign("/admin/bookings");
                     </script>
                     """
