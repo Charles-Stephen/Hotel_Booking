@@ -82,17 +82,19 @@
             <div class="tabs tabs-2">
                 <ul>
                     <li><a href="#tabs-4">BOOKED ROOMS</a></li>
-                    <li><a href="#tabs-5">CANCELED ROOMS</a></li>
-                    <li><a href="#tabs-6">DISAPPROVED ROOMS</a></li>
+<!--                    <li><a href="#tabs-5">CANCELED ROOMS</a></li>-->
+<!--                    <li><a href="#tabs-6">DISAPPROVED ROOMS</a></li>-->
                 </ul>
                 <div id="tabs-4">
                     <center>
-                      <table style="width:50%" class="table table-striped" border="2">
+                      <table style="width:80%" class="table table-striped" border="2">
                           <thead>
                               <tr>
                                   <th>Cover Image</th>
                                   <th>Room</th>
                                   <th>Booking Date</th>
+                                  <th>Starting Date</th>
+                                  <th>Ending Date</th>
                                   <th>Total Amount</th>
                               </tr>
                           </thead>
@@ -101,6 +103,8 @@
                                   <th>Cover Image</th>
                                   <th>Room</th>
                                   <th>Booking Date</th>
+                                  <th>Starting Date</th>
+                                  <th>Ending Date</th>
                                   <th>Total Amount</th>
                               </tr>
                           </tfoot>
@@ -110,6 +114,8 @@
                                   <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{b['cover_img']}}"></td>
                                   <td style="text-align: center">ROOM#{{b["room_number"]}}</td>
                                   <td style="text-align: center">{{b["booking_date"]}}</td>
+                                  <td style="text-align: center">{{b["starting_date"]}}</td>
+                                  <td style="text-align: center">{{b["ending_date"]}}</td>
                                   <td style="text-align: center">{{b["total_cost"]}}</td>
                               </tr>
                             {% endfor %}
@@ -118,78 +124,78 @@
                     </center>
                 </div>
 
-                <div id="tabs-5">
-                    <center>
-                      <table style="width:50%" class="table table-striped" border="2">
-                          <thead>
-                              <tr>
-                                  <th>Cover Image</th>
-                                  <th>Room</th>
-                                  <th>Booking Date</th>
-                                  <th>Total Amount</th>
-                                  <th>Action</th>
-                              </tr>
-                          </thead>
-                          <tfoot>
-                              <tr>
-                                  <th>Cover Image</th>
-                                  <th>Room</th>
-                                  <th>Booking Date</th>
-                                  <th>Total Amount</th>
-                                  <th>Action</th>
-                              </tr>
-                          </tfoot>
-                          <tbody>
-                            {% for c in can_b: %}
-                              <tr>
-                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{c['cover_img']}}"></td>
-                                  <td style="text-align: center">ROOM#{{c["room_number"]}}</td>
-                                  <td style="text-align: center">{{c["booking_date"]}}</td>
-                                  <td style="text-align: center">{{c["total_cost"]}}</td>
-                                  <td style="text-align: center">
-                                      <form action="/profile" method="post">
-                                          <input type="hidden" name="delid" value="{{c['id']}}">
-                                          <button type="submit" class="awe-btn awe-btn-5">Cancel Booking</button>
-                                      </form>
-                                  </td>
-                              </tr>
-                            {% endfor %}
-                          </tbody>
-                      </table>
-                    </center>
-                </div>
-                <div id="tabs-6">
-                    <center>
-                      <table style="width:50%" class="table table-striped" border="2">
-                          <thead>
-                              <tr>
-                                  <th>Cover Image</th>
-                                  <th>Room</th>
-                                  <th>Booking Date</th>
-                                  <th>Total Amount</th>
-                              </tr>
-                          </thead>
-                          <tfoot>
-                              <tr>
-                                  <th>Cover Image</th>
-                                  <th>Room</th>
-                                  <th>Booking Date</th>
-                                  <th>Total Amount</th>
-                              </tr>
-                          </tfoot>
-                          <tbody>
-                            {% for d in dis_b: %}
-                              <tr>
-                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{d['cover_img']}}"></td>
-                                  <td style="text-align: center">ROOM#{{d["room_number"]}}</td>
-                                  <td style="text-align: center">{{d["booking_date"]}}</td>
-                                  <td style="text-align: center">{{d["total_cost"]}}</td>
-                              </tr>
-                            {% endfor %}
-                          </tbody>
-                      </table>
-                    </center>
-                </div>
+<!--                <div id="tabs-5">-->
+<!--                    <center>-->
+<!--                      <table style="width:50%" class="table table-striped" border="2">-->
+<!--                          <thead>-->
+<!--                              <tr>-->
+<!--                                  <th>Cover Image</th>-->
+<!--                                  <th>Room</th>-->
+<!--                                  <th>Booking Date</th>-->
+<!--                                  <th>Total Amount</th>-->
+<!--                                  <th>Action</th>-->
+<!--                              </tr>-->
+<!--                          </thead>-->
+<!--                          <tfoot>-->
+<!--                              <tr>-->
+<!--                                  <th>Cover Image</th>-->
+<!--                                  <th>Room</th>-->
+<!--                                  <th>Booking Date</th>-->
+<!--                                  <th>Total Amount</th>-->
+<!--                                  <th>Action</th>-->
+<!--                              </tr>-->
+<!--                          </tfoot>-->
+<!--                          <tbody>-->
+<!--                            {% for c in can_b: %}-->
+<!--                              <tr>-->
+<!--                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{c['cover_img']}}"></td>-->
+<!--                                  <td style="text-align: center">ROOM#{{c["room_number"]}}</td>-->
+<!--                                  <td style="text-align: center">{{c["booking_date"]}}</td>-->
+<!--                                  <td style="text-align: center">{{c["total_cost"]}}</td>-->
+<!--                                  <td style="text-align: center">-->
+<!--                                      <form action="/profile" method="post">-->
+<!--                                          <input type="hidden" name="delid" value="{{c['id']}}">-->
+<!--                                          <button type="submit" class="awe-btn awe-btn-5">Cancel Booking</button>-->
+<!--                                      </form>-->
+<!--                                  </td>-->
+<!--                              </tr>-->
+<!--                            {% endfor %}-->
+<!--                          </tbody>-->
+<!--                      </table>-->
+<!--                    </center>-->
+<!--                </div>-->
+<!--                <div id="tabs-6">-->
+<!--                    <center>-->
+<!--                      <table style="width:50%" class="table table-striped" border="2">-->
+<!--                          <thead>-->
+<!--                              <tr>-->
+<!--                                  <th>Cover Image</th>-->
+<!--                                  <th>Room</th>-->
+<!--                                  <th>Booking Date</th>-->
+<!--                                  <th>Total Amount</th>-->
+<!--                              </tr>-->
+<!--                          </thead>-->
+<!--                          <tfoot>-->
+<!--                              <tr>-->
+<!--                                  <th>Cover Image</th>-->
+<!--                                  <th>Room</th>-->
+<!--                                  <th>Booking Date</th>-->
+<!--                                  <th>Total Amount</th>-->
+<!--                              </tr>-->
+<!--                          </tfoot>-->
+<!--                          <tbody>-->
+<!--                            {% for d in dis_b: %}-->
+<!--                              <tr>-->
+<!--                                  <td><img style="width: 8vw;" src="{{url_for('static', filename='frontend/room/')}}{{d['cover_img']}}"></td>-->
+<!--                                  <td style="text-align: center">ROOM#{{d["room_number"]}}</td>-->
+<!--                                  <td style="text-align: center">{{d["booking_date"]}}</td>-->
+<!--                                  <td style="text-align: center">{{d["total_cost"]}}</td>-->
+<!--                              </tr>-->
+<!--                            {% endfor %}-->
+<!--                          </tbody>-->
+<!--                      </table>-->
+<!--                    </center>-->
+<!--                </div>-->
             </div>
         </div>
     </section>

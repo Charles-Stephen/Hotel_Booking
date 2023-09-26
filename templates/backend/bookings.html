@@ -83,7 +83,7 @@
                                             <th>Room Number</th>
                                             <th>Package</th>
                                             <th>Total Cost</th>
-                                            <th class="text-center">Actions</th>
+<!--                                            <th class="text-center">Actions</th>-->
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -92,7 +92,7 @@
                                             <th>Room Number</th>
                                             <th>Package</th>
                                             <th>Total Cost</th>
-                                            <th class="text-center">Actions</th>
+<!--                                            <th class="text-center">Actions</th>-->
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -102,21 +102,21 @@
                                             <td class="align-middle">Room#{{b["room_number"]}}</td>
                                             <td class="align-middle">{{b["pname"]}}</td>
                                             <td class="align-middle">{{b["total_cost"]}}</td>
-                                            <td class="align-middle text-center">
-                                                <form action="/booking-details" class="mt-1 mb-1" method="post">
-                                                    <input type="hidden" name="bookid" value="{{b['id']}}" />
-                                                    <input class="bg-warning border border-warning rounded-pill" type="submit" value="Details">
-                                                </form>
+<!--                                            <td class="align-middle text-center">-->
+<!--                                                <form action="/booking-details" class="mt-1 mb-1" method="post">-->
+<!--                                                    <input type="hidden" name="bookid" value="{{b['id']}}" />-->
+<!--                                                    <input class="bg-warning border border-warning rounded-pill" type="submit" value="Details">-->
+<!--                                                </form>-->
 
-                                                <form action="/admin/bookings" class="mt-2 mb-1" method="post">
+<!--                                                <form action="/admin/bookings" class="mt-2 mb-1" method="post">-->
                                                     <!-- Checking if Disapprove Form Start -->
-                                                    <input type="hidden" name="dis" value="true">
-                                                    <input type="hidden" name="bookprice" value="{{b['total_cost']}}">
+<!--                                                    <input type="hidden" name="dis" value="true">-->
+<!--                                                    <input type="hidden" name="bookprice" value="{{b['total_cost']}}">-->
                                                     <!-- Checking if Disapprove Form End -->
-                                                    <input type="hidden" name="bookid" value="{{b['id']}}" />
-                                                    <input class="bg-success border border-success rounded-pill" type="submit" value="Disapprove">
-                                                </form>
-                                            </td>
+<!--                                                    <input type="hidden" name="bookid" value="{{b['id']}}" />-->
+<!--                                                    <input class="bg-success border border-success rounded-pill" type="submit" value="Disapprove">-->
+<!--                                                </form>-->
+<!--                                            </td>-->
                                         </tr>
                                     {% endfor %}
                                     </tbody>

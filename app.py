@@ -1652,6 +1652,9 @@ def admin_orders():
                 if (input_start <= existing_end) and (input_end >= existing_start):
                     available = "False"
                     break
+                elif input_end <= input_start:
+                    available = "False"
+                    break
 
             if available == "True":
                 status = "booked"
